@@ -52,3 +52,21 @@ nhan (2, 6, (err, kq) => {
     if(err) console.log(err);
     console.log(kq);
 });
+// (a+b)*h/2
+function dienTichHinhThang(a ,b, h, cb){
+    cong(a, b, (errCong,tong) => {
+        if(errCong) return cb(errCong);
+        nhan(+tong, h, (errNhan, tich) => {
+            if(errNhan) return cb(errNhan);
+            chia(+tich, h, (errChia, thuong) => {
+                if(errChia) return cb(errChia);
+                return cb(null, thuong);
+            });
+        });
+    });
+// server tra ve kieu chuoi  nen phai ep kieu ve so (+)
+}
+dienTichHinhThang(4, 5, 6, (err, kq) => {
+    if(err) return console.log(err);
+    console.log('Dien tich:' +kq);
+})
